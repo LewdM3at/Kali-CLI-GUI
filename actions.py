@@ -9,4 +9,5 @@ def pmkid_attack():
 
 def exit_menu():
     print("\033c", end="")  # full terminal reset
+    sys.exit(0)
 
