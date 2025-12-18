@@ -1,5 +1,5 @@
 
-menu_structure = 
+menu_structure = \
 {
     "main": 
     {
