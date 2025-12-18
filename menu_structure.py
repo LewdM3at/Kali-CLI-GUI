@@ -9,7 +9,7 @@ menu_structure = \
     "wifi": 
     {
         "title": "WiFi Attacks",
-        "items": ["pmkid", "back"],
+        "items": ["pmkid", "handshake", "pixie", "pin", "back"],
         "parent": "main", # back goes here
     },
 }

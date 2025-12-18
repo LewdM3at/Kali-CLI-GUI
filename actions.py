@@ -4,8 +4,19 @@ import sys
 
 def pmkid_attack():
     curses.endwin()
-    subprocess.run(["sudo", "wifite", "--pmkid"])
+    subprocess.run(["sudo", "wifite", "--pmkid", "--daemon"])
 
+def handshake_attack():
+    curses.endwin()
+    subprocess.run(["sudo", "wifite", "--no-pmkid", "--no-wps", "--daemon"])
+
+def pixiedust_attack():
+    curses.endwin()
+    subprocess.run(["sudo", "wifite", "--pixie", "--no-pmkid", "--wps-only", "--daemon"])
+
+def pin_attack():
+    curses.endwin()
+    subprocess.run(["sudo", "wifite", "--no-pixie", "--no-pmkid", "--wps-only", "--daemon"])
 
 def exit_menu():
     print("\033c", end="")  # full terminal reset
