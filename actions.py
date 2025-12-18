@@ -4,7 +4,7 @@ import sys
 
 def pmkid_attack():
     curses.endwin()
-    subprocess.run(["sudo", "wifite", "--kill", "--pmkid"])
+    subprocess.run(["sudo", "wifite", "--pmkid"])
 
 
 def exit_menu():
