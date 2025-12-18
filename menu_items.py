@@ -5,7 +5,7 @@ menu_items = \
 {
     "wifi":
     {
-        "label": "WiFi Attacks",
+        "label": "Wi-Fi",
         "art": ascii_art.wifi_art,
     },
     "exit":
