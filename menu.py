@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import curses
 import sys
 from menu_items import menu_items
