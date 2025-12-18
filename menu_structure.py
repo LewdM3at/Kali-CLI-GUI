@@ -1,4 +1,3 @@
-
 menu_structure = \
 {
     "main": 

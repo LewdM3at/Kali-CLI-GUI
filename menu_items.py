@@ -7,6 +7,7 @@ menu_items = \
     {
         "label": "Wi-Fi",
         "art": ascii_art.wifi_art,
+        "submenu": "wifi",
     },
     "exit":
     {
