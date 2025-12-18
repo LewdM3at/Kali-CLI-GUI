@@ -3,6 +3,14 @@ import curses
 import sys
 import os
 
+def auto_audit_attack():
+    curses.endwin()
+    # Reset terminal state (important after curses)
+    os.system("stty sane")
+    # Clear the screen so ncurses UI is gone
+    os.system("clear")
+    subprocess.run(["sudo", "wifite", "--daemon"])
+
 def pmkid_attack():
     curses.endwin()
     # Reset terminal state (important after curses)

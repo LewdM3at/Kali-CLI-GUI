@@ -15,6 +15,12 @@ menu_items = \
         "art": ascii_art.exit_art,
         "action": actions.exit_menu,
     },
+    "auto_audit":
+    {
+        "label": "Automatic Auditing",
+        "art": ascii_art.auto_audit_art,
+        "action": actions.auto_audit_attack,
+    },
     "pmkid":
     {
         "label": "PMKID Attack",
