@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import curses
 from menu_items import menu_items
 from menu_structure import menu_structure
