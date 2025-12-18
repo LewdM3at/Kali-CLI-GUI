@@ -55,7 +55,7 @@ def run_menu(stdscr, start_menu="main"):
             selected_idx = (selected_idx + 1) % len(menu["items"])
         elif key in [curses.KEY_ENTER, 10, 13]:
             if "action" in item:
-                curses.endwin()
+                #curses.endwin()
                 try:
                     item["action"]()   # this may call exit_menu()
                 except SystemExit:
