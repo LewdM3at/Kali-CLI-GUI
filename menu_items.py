@@ -1,7 +1,7 @@
 import ascii_art
 import actions
 
-menu_items =
+menu_items = \
 {
     "wifi":
     {
