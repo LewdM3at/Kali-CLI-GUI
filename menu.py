@@ -42,10 +42,9 @@ def run_menu(stdscr, start_menu="main"):
         item = menu_items[item_key]
 
         # Draw art + title
-        if "art" in item:
-            draw_ascii_and_title(stdscr, item["art"], item["label"])
-        else:
-            draw_ascii_and_title(stdscr, ["(no art)"], item["label"])
+        draw_ascii_and_title(stdscr,
+                             item.get("art", ["(no art)"]),
+                             item["label"])
 
         stdscr.refresh()
         key = stdscr.getch()
@@ -55,11 +54,14 @@ def run_menu(stdscr, start_menu="main"):
         elif key == curses.KEY_RIGHT:
             selected_idx = (selected_idx + 1) % len(menu["items"])
         elif key in [curses.KEY_ENTER, 10, 13]:
-            # Handle actions or submenu navigation
             if "action" in item:
                 curses.endwin()
-                item["action"]()
-                # If action returns, reinitialize curses
+                try:
+                    item["action"]()   # this may call exit_menu()
+                except SystemExit:
+                    # exit_menu calls sys.exit(0), so intercept here
+                    return             # cleanly leave run_menu
+                # if the action returns, re‑init curses
                 stdscr = curses.initscr()
                 curses.curs_set(0)
             elif "submenu" in item:
@@ -73,3 +75,4 @@ def run_menu(stdscr, start_menu="main"):
                     selected_idx = 0
         elif key == 27:  # ESC key
             break
+
