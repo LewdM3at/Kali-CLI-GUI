@@ -48,8 +48,21 @@ def run_menu(stdscr, start_menu="main"):
         elif key == curses.KEY_RIGHT:
             selected_idx = (selected_idx + 1) % len(menu["items"])
         elif key in [curses.KEY_ENTER, 10, 13]:
-            # Handle selection action here
-            pass
+            # Handle actions or submenu navigation
+            if "action" in item:
+                curses.endwin()  # restore terminal before running action
+                item["action"]()
+                # after action returns, reinitialize curses
+                stdscr = curses.initscr()
+                curses.curs_set(0)
+            elif "submenu" in item:
+                current_menu = item["submenu"]
+                selected_idx = 0
+            elif item_key == "back":
+                # go back to parent menu if defined
+                if "parent" in menu_structure[current_menu]:
+                    current_menu = menu_structure[current_menu]["parent"]
+                    selected_idx = 0
         elif key == 27:  # ESC key
             break
 
