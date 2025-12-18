@@ -39,13 +39,22 @@ def draw_menu(stdscr, menu_name, selected_idx):
 
 
 def run_menu(stdscr, start_menu="main"):
-    """Main loop for menu navigation."""
     curses.curs_set(0)
     current_menu = start_menu
     selected_idx = 0
 
     while True:
-        draw_menu
+        draw_menu(stdscr, current_menu, selected_idx)
+
+        key = stdscr.getch()
+
+        if key == curses.KEY_UP and selected_idx > 0:
+            selected_idx -= 1
+        elif key == curses.KEY_DOWN and selected_idx < len(menu_structure[current_menu]["items"]) - 1:
+            selected_idx += 1
+        elif key in [curses.KEY_ENTER, 10, 13]:
+            # handle selection here
+            pass
 
 if __name__ == "__main__":
     curses.wrapper(run_menu)
