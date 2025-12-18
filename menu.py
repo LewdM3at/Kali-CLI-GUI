@@ -1,41 +1,27 @@
 #!/usr/bin/env python3
 import curses
-import sys
 from menu_items import menu_items
 from menu_structure import menu_structure
 
 
-def draw_ascii(stdscr, art, y_offset=5, x_offset=2):
-    """Draw ASCII art at given offset."""
+def draw_ascii_and_title(stdscr, art, title):
+    """Draw ASCII art centered, with title below."""
+    h, w = stdscr.getmaxyx()
+    art_height = len(art)
+    art_width = max(len(line) for line in art)
+
+    # Center offsets
+    y_offset = (h // 2) - (art_height // 2)
+    x_offset = (w // 2) - (art_width // 2)
+
+    # Draw art
     for i, line in enumerate(art):
         stdscr.addstr(y_offset + i, x_offset, line)
 
-
-def draw_menu(stdscr, menu_name, selected_idx):
-    """Render a menu with highlighting and ASCII art."""
-    stdscr.clear()
-    menu = menu_structure[menu_name]
-
-    # Title
-    stdscr.addstr(0, 2, f"== {menu['title']} ==")
-
-    # Items
-    for idx, key in enumerate(menu["items"]):
-        item = menu_items[key]
-        label = item["label"]
-
-        if idx == selected_idx:
-            stdscr.attron(curses.A_REVERSE)
-            stdscr.addstr(2 + idx, 2, label)
-            stdscr.attroff(curses.A_REVERSE)
-
-            # Show ASCII art for selected item
-            if "art" in item:
-                draw_ascii(stdscr, item["art"])
-        else:
-            stdscr.addstr(2 + idx, 2, label)
-
-    stdscr.refresh()
+    # Draw title below art, centered
+    stdscr.addstr(y_offset + art_height + 1,
+                  (w // 2) - (len(title) // 2),
+                  title)
 
 
 def run_menu(stdscr, start_menu="main"):
@@ -44,17 +30,30 @@ def run_menu(stdscr, start_menu="main"):
     selected_idx = 0
 
     while True:
-        draw_menu(stdscr, current_menu, selected_idx)
+        stdscr.clear()
+        menu = menu_structure[current_menu]
+        item_key = menu["items"][selected_idx]
+        item = menu_items[item_key]
 
+        # Draw art + title
+        if "art" in item:
+            draw_ascii_and_title(stdscr, item["art"], item["label"])
+        else:
+            draw_ascii_and_title(stdscr, ["(no art)"], item["label"])
+
+        stdscr.refresh()
         key = stdscr.getch()
 
-        if key == curses.KEY_UP and selected_idx > 0:
-            selected_idx -= 1
-        elif key == curses.KEY_DOWN and selected_idx < len(menu_structure[current_menu]["items"]) - 1:
-            selected_idx += 1
+        if key == curses.KEY_LEFT:
+            selected_idx = (selected_idx - 1) % len(menu["items"])
+        elif key == curses.KEY_RIGHT:
+            selected_idx = (selected_idx + 1) % len(menu["items"])
         elif key in [curses.KEY_ENTER, 10, 13]:
-            # handle selection here
+            # Handle selection action here
             pass
+        elif key == 27:  # ESC key
+            break
+
 
 if __name__ == "__main__":
     curses.wrapper(run_menu)
