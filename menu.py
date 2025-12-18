@@ -46,3 +46,6 @@ def run_menu(stdscr, start_menu="main"):
 
     while True:
         draw_menu
+
+if __name__ == "__main__":
+    curses.wrapper(run_menu)
