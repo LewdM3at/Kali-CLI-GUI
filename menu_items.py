@@ -60,6 +60,7 @@ menu_items = \
     {
         "label": "Settings",
         "art": ascii_art.settings_art,
+        "submenu": "settings",
     },
     "wifi_settings":
     {
