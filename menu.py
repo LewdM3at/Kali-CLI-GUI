@@ -42,9 +42,10 @@ def run_menu(stdscr, start_menu="main"):
         item = menu_items[item_key]
 
         # Draw art + title
-        draw_ascii_and_title(stdscr,
-                             item.get("art", ["(no art)"]),
-                             item["label"])
+        art = item.get("art", ["(no art)"])
+        if callable(art):
+            art = art()
+        draw_ascii_and_title(stdscr, art, item["label"])
 
         stdscr.refresh()
         key = stdscr.getch()
