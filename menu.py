@@ -56,15 +56,14 @@ def run_menu(stdscr, start_menu="main"):
             selected_idx = (selected_idx + 1) % len(menu["items"])
         elif key in [curses.KEY_ENTER, 10, 13]:
             if "action" in item:
-                #curses.endwin()
                 try:
-                    item["action"]()   # this may call exit_menu()
+                    item["action"]()
                 except SystemExit:
-                    # exit_menu calls sys.exit(0), so intercept here
-                    return             # cleanly leave run_menu
-                # if the action returns, re‑init curses
-                stdscr = curses.initscr()
+                    return
+                stdscr.clear()
+                stdscr.refresh()
                 curses.curs_set(0)
+                continue  # force redraw with updated state
             elif "submenu" in item:
                 menu_stack.append(item["submenu"])
                 current_menu = item["submenu"]
