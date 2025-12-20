@@ -2,6 +2,7 @@ import subprocess
 import curses
 import sys
 import os
+import time
 
 def auto_audit_attack():
     curses.endwin()
