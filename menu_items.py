@@ -1,7 +1,7 @@
 import ascii_art
 import actions
 
-def wifi_toggle_action(stdscr):
+def wifi_toggle_action():
     actions.toggle_wifi()
 
 def get_wifi_art():
