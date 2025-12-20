@@ -1,6 +1,12 @@
 import ascii_art
 import actions
 
+def wifi_toggle_action(stdscr):
+    actions.toggle_wifi()
+
+def get_wifi_art():
+    return ascii_art.wifi_art if actions.is_wifi_up() else ascii_art.wifi_off_art
+
 menu_items = \
 {
     "wifi":
@@ -58,6 +64,7 @@ menu_items = \
     "wifi_settings":
     {
         "label": "Wi-Fi",
-        "art": ascii_art.wifi_art,
+        "art": get_wifi_art,
+        "action": wifi_toggle_action,
     },
 }

@@ -43,6 +43,19 @@ def pin_attack():
     os.system("clear")
     subprocess.run(["sudo", "wifite", "--no-pixie", "--no-pmkid", "--wps-only", "--daemon"])
 
+def is_wifi_up():
+    try:
+        result = subprocess.run(["ip", "link", "show", "wlan0"], capture_output=True, text=True)
+        return "state UP" in result.stdout
+    except Exception:
+        return False
+
+def toggle_wifi():
+    if is_wifi_up():
+        subprocess.run(["sudo", "ip", "link", "set", "wlan0", "down"])
+    else:
+        subprocess.run(["sudo", "ip", "link", "set", "wlan0", "up"])
+
 def exit_menu():
     print("\033c", end="")  # full terminal reset
     sys.exit(0)
