@@ -12,4 +12,10 @@ menu_structure = \
         "items": ["auto_audit", "pmkid", "handshake", "pixie", "pin", "back"],
         "parent": "main", # back goes here
     },
+    "settings": 
+    {
+        "title": "Settings",
+        "items": ["wifi_settings", "back"],
+        "parent": "main", # back goes here
+    },
 }
