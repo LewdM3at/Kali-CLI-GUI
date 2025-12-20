@@ -55,4 +55,9 @@ menu_items = \
         "label": "Settings",
         "art": ascii_art.settings_art,
     },
+    "wifi_settings":
+    {
+        "label": "Wi-Fi",
+        "art": ascii_art.wifi_art,
+    },
 }
