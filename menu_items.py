@@ -50,4 +50,9 @@ menu_items = \
         "label": "Back",
         "art": ascii_art.back_art,
     },
+    "settings":
+    {
+        "label": "Settings",
+        "art": ascii_art.settings_art,
+    },
 }

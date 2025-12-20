@@ -3,7 +3,7 @@ menu_structure = \
     "main": 
     {
         "title": "Main Menu",
-        "items": ["wifi", "exit"],
+        "items": ["wifi", "settings", "exit"],
         "parent": None,   # root has no parent
     },
     "wifi": 
