@@ -55,6 +55,7 @@ def toggle_wifi():
         subprocess.run(["sudo", "ip", "link", "set", "wlan0", "down"])
     else:
         subprocess.run(["sudo", "ip", "link", "set", "wlan0", "up"])
+        time.sleep(1.5)  # wait for interface to come up
 
 def exit_menu():
     print("\033c", end="")  # full terminal reset
