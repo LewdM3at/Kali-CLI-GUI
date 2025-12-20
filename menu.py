@@ -60,10 +60,12 @@ def run_menu(stdscr, start_menu="main"):
                     item["action"]()
                 except SystemExit:
                     return
+                # Re-fetch the item to update dynamic art
+                item = menu_items[item_key]
                 stdscr.clear()
                 stdscr.refresh()
                 curses.curs_set(0)
-                continue  # force redraw with updated state
+                continue
             elif "submenu" in item:
                 menu_stack.append(item["submenu"])
                 current_menu = item["submenu"]
